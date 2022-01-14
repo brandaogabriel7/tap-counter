@@ -21,13 +21,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "commit": "cz"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "commit": "cz",
+    "cypress": "cypress open"
   },
   "browserslist": {
     "production": [
@@ -42,6 +37,7 @@
     ]
   },
   "devDependencies": {
+    "cypress": "^9.2.1",
     "cz-conventional-changelog": "3.3.0"
   },
   "config": {
