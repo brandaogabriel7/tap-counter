@@ -2,6 +2,10 @@ import { render, screen } from '@testing-library/react';
 import App from './App';
 import userEvent from '@testing-library/user-event';
 
+const getCounter = (count: number) => {
+  return screen.getByRole('heading', { name: count.toString() });
+};
+
 const buttonClicksTestCases = [[1], [2], [21], [30]];
 describe('tap counter should', () => {
   beforeEach(() => render(<App />));
@@ -13,7 +17,7 @@ describe('tap counter should', () => {
   });
 
   it('render a counter starting on 0', () => {
-    expect(screen.getByText(0)).toBeInTheDocument();
+    expect(getCounter(0)).toBeInTheDocument();
   });
 
   it('render a tap button', () => {
@@ -27,14 +31,14 @@ describe('tap counter should', () => {
   it.each(buttonClicksTestCases)(
     'increase the count by %d when the tap button is clicked',
     (clicks) => {
-      expect(screen.getByText(0)).toBeInTheDocument();
+      expect(getCounter(0)).toBeInTheDocument();
 
       const tapButton = screen.getByRole('button', { name: /tap/i });
       for (let i = 0; i < clicks; i++) {
         userEvent.click(tapButton);
       }
 
-      expect(screen.getByText(clicks)).toBeInTheDocument();
+      expect(getCounter(clicks)).toBeInTheDocument();
     }
   );
 
@@ -51,7 +55,7 @@ describe('tap counter should', () => {
 
       userEvent.click(resetButton);
 
-      expect(screen.getByText(0)).toBeInTheDocument();
+      expect(getCounter(0)).toBeInTheDocument();
     }
   );
 });

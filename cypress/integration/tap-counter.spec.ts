@@ -2,10 +2,13 @@ import '@testing-library/cypress/add-commands';
 
 const findMain = () => cy.findByRole('main');
 
-const findResetButton = () =>
-  findMain().findByRole('button', { name: /reset/i });
+const findCounter = (count: number) =>
+  findMain().findByRole('heading', { name: count.toString() });
 
 const findTapButton = () => findMain().findByRole('button', { name: /tap/i });
+
+const findResetButton = () =>
+  findMain().findByRole('button', { name: /reset/i });
 
 const tapButtonClicksTestCases = [[1], [2], [7], [21]];
 
@@ -19,7 +22,7 @@ describe('when a user visits the tap counter page', () => {
   });
 
   it('the counter should start on 0 and reset button should be disabled', () => {
-    findMain().findByText('0').should('be.visible');
+    findCounter(0).should('be.visible');
     findResetButton().should('be.disabled');
   });
 
@@ -30,7 +33,7 @@ describe('when a user visits the tap counter page', () => {
         findTapButton().click();
       }
 
-      findMain().findByText(clicks).should('be.visible');
+      findCounter(clicks).should('be.visible');
     });
 
     it(`clicking the reset button when the count is ${clicks} should set the counter to 0 and disable reset button`, () => {
@@ -40,7 +43,7 @@ describe('when a user visits the tap counter page', () => {
 
       findResetButton().click();
 
-      findMain().findByText(0).should('be.visible');
+      findCounter(0).should('be.visible');
       findResetButton().should('be.disabled');
     });
   });
