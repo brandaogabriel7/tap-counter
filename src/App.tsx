@@ -9,6 +9,10 @@ const App = () => {
     setCount(count + 1);
   };
 
+  const resetCountHandler = () => {
+    setCount(0);
+  };
+
   return (
     <>
       <header>
@@ -16,6 +20,9 @@ const App = () => {
         <main>
           <Counter count={count} />
           <button onClick={increaseCountHandler}>Tap</button>
+          <button onClick={resetCountHandler} disabled={count == 0}>
+            Reset
+          </button>
         </main>
       </header>
     </>
