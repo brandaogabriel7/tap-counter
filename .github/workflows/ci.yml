@@ -24,7 +24,7 @@ jobs:
       - name: Run tests
         uses: borales/actions-yarn@v2.3.0
         with:
-          cmd: test
+          cmd: coverage
 
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
