@@ -2,10 +2,10 @@ name: CI
 
 on:
   push:
-    branches: [ develop, master ]
+    branches: [develop, master]
   pull_request:
-    branches: [ develop, master ]
-    
+    branches: [develop, master]
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,12 +20,12 @@ jobs:
         uses: borales/actions-yarn@v2.3.0
         with:
           cmd: install
-          
+
       - name: Run tests
         uses: borales/actions-yarn@v2.3.0
         with:
-          cmd: test
-          
+          cmd: coverage
+
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
         env:
@@ -35,3 +35,9 @@ jobs:
           args: >
             -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
             -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+            -Dsonar.sources="./src"
+            -Dsonar.exclusions="**/__tests__/**,./src/index.tsx,./src/reportWebVitals.ts"
+            -Dsonar.tests="./src"
+            -Dsonar.test.inclusions="./src/**/__tests__/**/*.spec.tsx,./src/**/__tests__/**/*.spec.ts"
+            -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info
+            -Dsonar.testExecutionReportPaths=test-report.xml
