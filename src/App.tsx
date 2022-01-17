@@ -1,26 +1,52 @@
-import React from 'react';
-import logo from './logo.svg';
+import { Button, ButtonGroup, Typography, Box } from '@mui/material';
+import { useState } from 'react';
 import './App.css';
+import Counter from './components/Counter/Counter';
 
-function App() {
+const App = () => {
+  const [count, setCount] = useState(0);
+
+  const increaseCountHandler = () => {
+    setCount(count + 1);
+  };
+
+  const resetCountHandler = () => {
+    setCount(0);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <>
+      <header>
+        <Typography textAlign="center" variant="h1">
+          Tap Counter
+        </Typography>
       </header>
-    </div>
+      <Box
+        component="main"
+        sx={{
+          margin: 'auto',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center'
+        }}
+      >
+        <Counter count={count} />
+        <ButtonGroup>
+          <Button variant="contained" onClick={increaseCountHandler}>
+            Tap
+          </Button>
+          <Button
+            variant="outlined"
+            color="error"
+            onClick={resetCountHandler}
+            disabled={count == 0}
+          >
+            Reset
+          </Button>
+        </ButtonGroup>
+      </Box>
+    </>
   );
-}
+};
 
 export default App;
