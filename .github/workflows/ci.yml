@@ -36,7 +36,7 @@ jobs:
             -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
             -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
             -Dsonar.sources="./src"
-            -Dsonar.exclusions="**/__tests__/**"
+            -Dsonar.exclusions="**/__tests__/**,./src/index.tsx,./src/reportWebVitals.ts"
             -Dsonar.tests="./src"
             -Dsonar.test.inclusions="./src/**/__tests__/**/*.spec.tsx,./src/**/__tests__/**/*.spec.ts"
             -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info
