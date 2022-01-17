@@ -1,7 +1,7 @@
-const Counter = ({ count }: ICounterProps) => <main>{count}</main>;
+const Counter = ({ count = 0 }: ICounterProps) => <>{count}</>;
 
 interface ICounterProps {
-  count: number;
+  count?: number;
 }
 
 export default Counter;

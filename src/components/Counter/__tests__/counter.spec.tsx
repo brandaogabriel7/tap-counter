@@ -1,13 +1,12 @@
-import { render, screen, within } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import Counter from '../Counter';
 
-const countTestCases = [[0], [1], [6], [73]];
+const countTestCases = [[0], [1], [6], [73], [1000]];
 
 describe('counter should', () => {
-  it.each(countTestCases)('show the %d as count', (count) => {
+  it.each(countTestCases)('show %d as count', (count) => {
     render(<Counter count={count} />);
 
-    const main = screen.getByRole('main');
-    expect(within(main).getByText(count)).toBeInTheDocument();
+    expect(screen.getByText(count)).toBeInTheDocument();
   });
 });
