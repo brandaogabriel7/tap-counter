@@ -7,9 +7,9 @@ sonarqubeScanner(
       'sonar.organization': process.env.SONAR_ORGANIZATION,
       'sonar.projectKey': process.env.SONAR_PROJECT_KEY,
       'sonar.sources': './src',
-      'sonar.exclusions':
-        '**/__tests__/**,./src/index.tsx,./src/reportWebVitals.ts',
+      'sonar.exclusions': '**/__tests__/**',
       'sonar.tests': './src',
+      'sonar.coverage.exclusions': './src/index.tsx,./src/reportWebVitals.ts',
       'sonar.test.inclusions':
         './src/**/__tests__/**/*.spec.tsx,./src/**/__tests__/**/*.spec.ts',
       'sonar.typescript.lcov.reportPaths': './coverage/lcov.info',
