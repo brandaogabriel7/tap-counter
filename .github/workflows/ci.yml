@@ -26,7 +26,19 @@ jobs:
         with:
           cmd: coverage
 
-      - name: Run SonarCloud analysis
-        uses: borales/actions-yarn@v2.3.0
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
-          cmd: sonar
+          args: >
+            -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
+            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+            -Dsonar.sources="./src"
+            -Dsonar.exclusions="**/__tests__/**"
+            -Dsonar.tests="./src"
+            -Dsonar.coverage.exclusions="./src/index.tsx,./src/reportWebVitals.ts"
+            -Dsonar.test.inclusions="./src/**/__tests__/**/*.spec.tsx,./src/**/__tests__/**/*.spec.ts"
+            -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info
+            -Dsonar.testExecutionReportPaths=test-report.xml
