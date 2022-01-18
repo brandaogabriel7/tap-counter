@@ -51,8 +51,7 @@
     "eslint-plugin-jest": "^25.3.4",
     "eslint-plugin-prettier": "^3.4.1",
     "jest-sonar-reporter": "^2.0.0",
-    "prettier": "^2.5.1",
-    "sonarqube-scanner": "^2.8.1"
+    "prettier": "^2.5.1"
   },
   "jestSonar": {
     "reportFile": "test-report.xml",
