@@ -26,7 +26,8 @@
     "eject": "react-scripts eject",
     "commit": "cz",
     "cypress": "cypress open",
-    "coverage": "cross-env CI=true react-scripts test --silent --env=jsdom --coverage --testResultsProcessor jest-sonar-reporter"
+    "coverage": "cross-env CI=true react-scripts test --silent --env=jsdom --coverage --testResultsProcessor jest-sonar-reporter",
+    "sonar": "node sonar-project.js"
   },
   "browserslist": {
     "production": [
