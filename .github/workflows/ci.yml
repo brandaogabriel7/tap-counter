@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [develop, master]
+  pull_request:
+    branches: [develop, master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Install dependencies
+        uses: borales/actions-yarn@v2.3.0
+        with:
+          cmd: install
+
+      - name: Run tests
+        uses: borales/actions-yarn@v2.3.0
+        with:
+          cmd: coverage
+
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
+            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+            -Dsonar.sources="./src"
+            -Dsonar.exclusions="**/__tests__/**,./src/index.tsx,./src/reportWebVitals.ts"
+            -Dsonar.tests="./src"
+            -Dsonar.coverage.exclusions="./src/index.tsx,./src/reportWebVitals.ts"
+            -Dsonar.test.inclusions="./src/**/__tests__/**/*.spec.tsx,./src/**/__tests__/**/*.spec.ts"
+            -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info
+            -Dsonar.testExecutionReportPaths=test-report.xml

@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@mui/material": "^5.2.8",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -21,13 +24,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "commit": "cz"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "commit": "cz",
+    "cypress": "cypress open",
+    "coverage": "cross-env CI=true react-scripts test --silent --env=jsdom --coverage --testResultsProcessor jest-sonar-reporter"
   },
   "browserslist": {
     "production": [
@@ -42,7 +41,21 @@
     ]
   },
   "devDependencies": {
-    "cz-conventional-changelog": "3.3.0"
+    "@babel/eslint-parser": "^7.16.5",
+    "@testing-library/cypress": "^8.0.2",
+    "cross-env": "^7.0.3",
+    "cypress": "^9.2.1",
+    "cz-conventional-changelog": "3.3.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-cypress": "^2.12.1",
+    "eslint-plugin-jest": "^25.3.4",
+    "eslint-plugin-prettier": "^3.4.1",
+    "jest-sonar-reporter": "^2.0.0",
+    "prettier": "^2.5.1"
+  },
+  "jestSonar": {
+    "reportFile": "test-report.xml",
+    "indent": 4
   },
   "config": {
     "commitizen": {
